@@ -1,0 +1,96 @@
+"shippedDate": "2023-09-29",
+"createDate":"2023-07-29"
+    "status": "WAITING",
+    "paymentType": "CASH",
+    "customerId": "64f5dcd2e88c67c4180567f2",
+    "employeeId": "64f5e27ee88c67c418056807",
+    "productList": [
+        {
+            "productId": "64f5e409e88c67c41805680f",
+            "quantity": 10,
+            "price": 6500,
+            "discount": 5
+        },
+        {
+            "productId": "64f5e5a5e88c67c418056811",
+            "quantity": 10,
+            "price": 5500,
+            "discount": 6
+        },
+    ]
+
+
+
+
+    let results = await Employee.aggregate()
+        .lookup({
+          from: 'orders',
+          localField: '_id',
+          foreignField: '_id',
+          as: 'orders',
+        })
+        .lookup({
+          from: 'products',
+          localField: '_id',
+          foreignField: 'productId',
+          as: 'products'
+        })
+        .unwind({
+          path: '$products',
+          preserveNullAndEmptyArrays: true,
+        })
+      //   .unwind({
+      //     path: '$orders',
+      //     preserveNullAndEmptyArrays: true,
+      //   })
+      //   .unwind({
+      //     path: '$orders.productList',
+      //     preserveNullAndEmptyArrays: true,
+      //   })
+      // .unwind({
+      //   path: '$productList',
+      //   preserveNullAndEmptyArrays: true,
+      // })
+      // .addFields({
+      //   total: {
+      //     $sum: {
+      //       $divide: [
+      //         {
+      //           $multiply: [
+      //             '$productList.price',
+      //             { $subtract: [100, '$productList.discount'] },
+      //             '$productList.quantity',
+      //           ],
+      //         },
+      //         100,
+      //       ],
+      //     },
+      //   },
+      // })
+      // .lookup({
+      //   from: 'employees',
+      //   localField: 'employeeId',
+      //   foreignField: '_id',
+      //   as: 'employee',
+      // })
+      // // .unwind('employee')
+      // .unwind(
+      //   {
+      //     path: '$employee',
+      //     preserveNullAndEmptyArrays: true,
+      //   }
+      // )
+      // .group({
+      //   _id: '$employee._id',
+      //   firstName: { $first: '$employee.firstName' },
+      //   lastName: { $first: '$employee.lastName' },
+      //   email: { $first: '$employee.email' },
+      //   phoneNumber: { $first: '$employee.phoneNumber' },
+      //   address: { $first: '$employee.address' },
+      //   birthday: { $first: '$employee.birthday' },
+      //   password: { $first: '$employee.password' },
+      //   total: { $sum: '$total' },
+      // })
+      // .sort({
+      //   lastName: 1,
+      // }); 
