@@ -14,6 +14,7 @@ const passportVerifyToken = new JwtStrategy(
   },
   async (payload, done) => {
     try {
+
       const user = await Employee.findOne({ 
         _id: payload._id,
         isDeleted: false,
@@ -34,6 +35,7 @@ const passportVerifyToken = new JwtStrategy(
 
 const passportVerifyAccount = new LocalStrategy({ usernameField: 'email' },
   async (email, password, done) => {
+
     try {
       const user = await Employee.findOne({
         isDeleted: false,
@@ -48,7 +50,10 @@ const passportVerifyAccount = new LocalStrategy({ usernameField: 'email' },
 
       user.password = undefined;
 
+      console.log('««««« isCorrectPass »»»»»', isCorrectPass );
+
       if (!isCorrectPass) return done(null, false);
+
 
       return done(null, user);
     } catch (error) {

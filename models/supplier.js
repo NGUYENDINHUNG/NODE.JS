@@ -36,7 +36,7 @@ const SupplierSchema = new Schema(
       type: String,
       maxLength: [500, "Địa chỉ không được vượt quá 50 kí tự"],
     },
-    isDelete: {
+    isDeleted: {
       type: Boolean,
       required: true,
       default: false,

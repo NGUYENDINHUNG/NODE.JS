@@ -16,7 +16,7 @@ const customerRouter = require("./routes/customer/router");
 const employeeRouter = require("./routes/employee/router");
 const productRouter = require("./routes/product/router");
 const orderRouter = require("./routes/order/router");
- const questionRouter = require("./routes/questions/router")
+const questionRouter = require("./routes/questions/router")
  const {
   passportVerifyToken,
   passportVerifyAccount,
@@ -28,8 +28,6 @@ const app = express();
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "jade");
-
-
 
 passport.use(passportVerifyToken);
 passport.use(passportVerifyAccount);

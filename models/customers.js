@@ -56,7 +56,7 @@ const customerSchema = new Schema(
 
     birthday : {type:Date},
 
-    isDelete: {
+    isDeleted: {
       type: Boolean,
       required: true,
       default: false,
