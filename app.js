@@ -5,6 +5,7 @@ const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const { default: mongoose } = require("mongoose");
 const passport = require('passport');
+const cors = require('cors');
 require('dotenv').config();
 
 
@@ -38,6 +39,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+
+
+// Add CORS here
+app.use(
+  cors({
+    origin: '*',
+  }),
+);
 
 // mongoose.connect("mongodb://127.0.0.1:27017/node-Test-database");
 mongoose.connect("mongodb+srv://nguyenhung21001:hung1234@cluster0.jhoowlf.mongodb.net/node-32-database");
