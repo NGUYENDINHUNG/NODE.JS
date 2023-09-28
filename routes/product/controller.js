@@ -11,9 +11,9 @@ module.exports = {
         .populate("supplier")
         .lean();
 
-      return res.send({ code: 200, payload: results });
+      return res.sendStatus(200).json({ code: 200, payload: results });
     } catch (err) {
-      return res.send(404, {
+      return res.status(404).json( {
         message: "Không tìm thấy",
         err,
       });
@@ -38,9 +38,9 @@ module.exports = {
 
       const total = await Product.countDocuments(conditionFind);
 
-      return res.send({ code: 200, payload: results, total });
+      return res.sendStatus(200).json({ code: 200, payload: results, total });
     } catch (err) {
-      return res.send(404, {
+      return res.status(404).json( {
         message: "Không tìm thấy",
         err,
       });
@@ -96,13 +96,13 @@ module.exports = {
 
       const total = await Product.countDocuments(conditionFind);
 
-      res.send(200, {
+      res.status(200).json( {
         message: "Thành công",
         payload: result,
         total,
       });
     } catch (error) {
-      return res.send(404, {
+      return res.status(404).json( {
         message: "Không tìm thấy",
       });
     }
@@ -120,7 +120,7 @@ module.exports = {
         .populate("supplier");
 
       if (result) {
-        return res.send({ code: 200, payload: result });
+        return res.sendStatus(200).json({ code: 200, payload: result });
       }
 
       return res.status(404).send({ code: 404, message: "Không tìm thấy" });
@@ -169,7 +169,7 @@ module.exports = {
 
 
       if (error.length > 0) {
-        return res.send(400, {
+        return res.status(400).json( {
           error,
           message: "Không khả dụng",
         });
@@ -187,13 +187,13 @@ module.exports = {
 
       let result = await newRecord.save();
 
-      return res.send(200, {
+      return res.status(200).json( {
         message: "Thành công",
         payload: result,
       });
     } catch (error) {
       console.log("««««« error »»»»»", error);
-      return res.send(404, {
+      return res.status(404).json( {
         message: "Có lỗi",
         error,
       });
@@ -242,7 +242,7 @@ module.exports = {
       }
 
       if (error.length > 0) {
-        return res.send(400, {
+        return res.status(400).json( {
           error,
           message: "Không khả dụng",
         });
@@ -265,7 +265,7 @@ module.exports = {
       return res.status(400).json({ message: "Update failed" });
     } catch (error) {
       console.log("««««« error »»»»»", error);
-      return res.send(404, {
+      return res.status(404).json( {
         message: "Có lỗi",
         error,
       });
@@ -283,17 +283,17 @@ module.exports = {
       );
 
       if (result) {
-        return res.send(200, {
+        return res.status(200).json( {
           message: "Xóa thành công",
           payload: result,
         });
       }
 
-      return res.send(400, {
+      return res.status(400).json( {
         message: "Thất bại",
       });
     } catch (error) {
-      return res.send(404, {
+      return res.status(404).json( {
         message: "Không tìm thấy",
         error,
       });

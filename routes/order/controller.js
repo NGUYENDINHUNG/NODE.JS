@@ -8,7 +8,7 @@ module.exports = {
     try {
       let results = await Order.find();
 
-      return res.send({ code: 200, payload: results });
+      return res.sendStatus(200).json({ code: 200, payload: results });
     } catch (err) {
       return res.status(500).json({ code: 500, error: err });
     }
@@ -21,7 +21,7 @@ module.exports = {
       let found = await Order.findById(id);
 
       if (found) {
-        return res.send({ code: 200, payload: found });
+        return res.sendStatus(200).json({ code: 200, payload: found });
       }
 
       return res.status(410).send({ code: 404, message: "Không tìm thấy" });
@@ -110,7 +110,7 @@ module.exports = {
       });
 
       
-      return res.send({
+      return res.sendStatus(200).json({
         code: 200,
         message: "Tạo thành công",
         payload: result,
@@ -149,7 +149,7 @@ module.exports = {
           { new: true }
         );
 
-        return res.send({
+        return res.sendStatus(200).json({
           code: 200,
           payload: result,
           message: "Cập nhật trạng thái thành công",
@@ -200,7 +200,7 @@ module.exports = {
         );
 
         if (updateOrder) {
-          return res.send({
+          return res.sendStatus(200).json({
             code: 200,
             message: "Cập nhật thành công",
             payload: updateOrder,
@@ -210,7 +210,7 @@ module.exports = {
         return res.status(404).send({ code: 404, message: "Không tìm thấy" });
       }
 
-      return res.send({ code: 400, message: "Không thể cập nhật" });
+      return res.sendStatus(200).json({ code: 400, message: "Không thể cập nhật" });
     } catch (error) {
       return res.status(500).json({ code: 500, error: err });
     }
@@ -231,7 +231,7 @@ module.exports = {
         return res.status(404).send({ code: 404, message: "Không tìm thấy" });
       }
 
-      return res.send({
+      return res.sendStatus(200).json({
         code: 200,
         message: "Cập nhật thành công",
         payload: updateOrder,
