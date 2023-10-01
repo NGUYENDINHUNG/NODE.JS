@@ -48,5 +48,5 @@ const SupplierSchema = new Schema(
   }
 );
 
-const Supplier = model("supplier", SupplierSchema);
+const Supplier = model("suppliers", SupplierSchema);
 module.exports = Supplier;

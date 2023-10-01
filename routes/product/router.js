@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 const passport = require('passport');
 
+// passport.authenticate('jwt', { session: false })
+
 const { validateSchema, checkIdSchema } = require('../../utitl')
 
 const { getDetail, getList, getAll, search, create, update, updatePatch, hardDelete, softDelete, fake } = require('./controller');
@@ -12,7 +14,7 @@ router.route('/all')
 
 router.route('/')
   .get(getList)
-  .post(passport.authenticate('jwt', { session: false }), validateSchema(validationSchema), create)
+  .post(validateSchema(validationSchema), create)
 
 router.route('/fake')
   .post(fake)
@@ -21,8 +23,8 @@ router.get('/search', validateSchema(validationQuerySchema), search);
 
 router.route('/:id')
   .get(validateSchema(checkIdSchema), getDetail)
-  .put(passport.authenticate('jwt', { session: false }), validateSchema(checkIdSchema), validateSchema(validationSchema), update)
+  .put( validateSchema(checkIdSchema), validateSchema(validationSchema), update)
 
-router.patch('/delete/:id', passport.authenticate('jwt', { session: false }), softDelete);
+router.patch('/delete/:id',  softDelete);
 
 module.exports = router;
