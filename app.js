@@ -56,13 +56,13 @@ app.use(
 //mongoose.connect("mongodb+srv://strinhphuongdev:xjJx9zdpdfLS2JCI@cluster0.xrdmevl.mongodb.net/node-33-database");
 mongoose.connect(`${CONNECTION_STRING}${DB_NAME}`);
 app.use('/auth', authRouter);
-
 app.use('/employees', employeeRouter);
-app.use('/products',  productRouter);
-app.use('/categories', categoriesRouter);
-app.use('/suppliers',  supplierRouter);
-app.use('/customers', customerRouter);
-app.use('/orders', orderRouter);
+
+app.use('/products', passport.authenticate('jwt', { session: false }),   productRouter);
+app.use('/categories',passport.authenticate('jwt', { session: false }), categoriesRouter);
+app.use('/suppliers',passport.authenticate('jwt', { session: false }),  supplierRouter);
+app.use('/customers',passport.authenticate('jwt', { session: false }), customerRouter);
+app.use('/orders',passport.authenticate('jwt', { session: false }), orderRouter);
 
 
 // catch 404 and forward to error handler
