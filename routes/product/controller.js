@@ -50,10 +50,10 @@ module.exports = {
       let results = await Product.find(conditionFind)
         // .populate('category')
         // .populate('supplier')
-        // .skip(skip)
-        // .limit(limit)
-        // .sort({ "name": 1, "price": 1 , "discount": -1})
-        // .lean();
+         //.skip(skip)
+         //.limit(limit)
+         //.sort({ "name": 1, "price": 1 , "discount": -1})
+        //.lean();
 
       const total = await Product.countDocuments(conditionFind)
 

@@ -52,8 +52,9 @@ app.use(
 );
 
 // mongoose.connect("mongodb://127.0.0.1:27017/node-Test-database");
-mongoose.connect("mongodb+srv://nguyenhung21001:hung1234@cluster0.jhoowlf.mongodb.net/node-32-database");
+//mongoose.connect("mongodb+srv://nguyenhung21001:hung1234@cluster0.jhoowlf.mongodb.net/node-32-database");
 //mongoose.connect("mongodb+srv://strinhphuongdev:xjJx9zdpdfLS2JCI@cluster0.xrdmevl.mongodb.net/node-33-database");
+mongoose.connect(`${CONNECTION_STRING}${DB_NAME}`);
 app.use('/auth', authRouter);
 
 app.use('/employees', employeeRouter);
