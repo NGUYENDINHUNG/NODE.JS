@@ -22,17 +22,34 @@ module.exports = {
   //   }
   // },
 
-  getAll: async (req, res, next) => {
+  // getAll: async (req, res, next) => {
+  //   try {
+  //     let results = await Product.find({
+  //       isDeleted: false,
+  //     })
+  //    //  .populate('category')
+  //     // .populate('supplier')
+  //      .lean();
+  //     return res.status(200).json({ code: 200, payload: results });
+  //   } catch (err) {
+  //     return res.status(404).json({
+  //       message: "Không tìm thấy",
+  //       err,
+  //     });
+  //   }
+  // },
+  getAll: async (req, res, next) => { // NOTE
     try {
       let results = await Product.find({
         isDeleted: false,
       })
-     //  .populate('category')
-      // .populate('supplier')
-       .lean();
-      return res.status(200).json({ code: 200, payload: results });
+        .populate('category') //productSchema.virtual('category'), at models/product
+        .populate('supplier') //productSchema.virtual('supplier'), at models/product
+        .lean();
+
+      return res.send({ code: 200, payload: results });
     } catch (err) {
-      return res.status(404).json({
+      return res.send(404, {
         message: "Không tìm thấy",
         err,
       });
@@ -47,13 +64,19 @@ module.exports = {
 
       const conditionFind = { isDeleted: false };
 
+      // let results = await Product.find(conditionFind)
+      //   .populate('category')
+      //   .populate('supplier')
+      //    .skip(skip)
+      //    .limit(limit)
+      //    .sort({ "name": 1, "price": 1 , "discount": -1})
+      //   .lean();
       let results = await Product.find(conditionFind)
-        // .populate('category')
-        // .populate('supplier')
-         //.skip(skip)
-         //.limit(limit)
-         //.sort({ "name": 1, "price": 1 , "discount": -1})
-        //.lean();
+      .populate('category')
+      .populate('supplier')
+      .skip(skip)
+      .limit(limit)
+      .lean();
 
       const total = await Product.countDocuments(conditionFind)
 
