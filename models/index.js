@@ -4,6 +4,7 @@ const Customer = require("./customers");
 const Employee = require("./employee");
 const Product = require("./Product")
 const Order = require("./Order");
+const Media = require("./Media")
 module.exports={
     Category,
     Supplier,
@@ -11,4 +12,5 @@ module.exports={
     Employee,
     Product,
     Order,
+    Media,
 };

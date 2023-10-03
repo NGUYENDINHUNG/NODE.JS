@@ -18,6 +18,7 @@ const employeeRouter = require("./routes/employee/router");
 const productRouter = require("./routes/product/router");
 const orderRouter = require("./routes/order/router");
 const questionRouter = require("./routes/questions/router")
+const mediaRouter = require('./routes/media/router');
 
 const { CONNECTION_STRING, DB_NAME } = require('./constants/db');
 
@@ -41,8 +42,8 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "public")));
-
+//app.use(express.static(path.join(__dirname, "public")));
+app.use('/public',express.static(path.join(__dirname,'public')));
 
 // Add CORS here
 app.use(
@@ -63,7 +64,7 @@ app.use('/categories',passport.authenticate('jwt', { session: false }), categori
 app.use('/suppliers',passport.authenticate('jwt', { session: false }),  supplierRouter);
 app.use('/customers',passport.authenticate('jwt', { session: false }), customerRouter);
 app.use('/orders',passport.authenticate('jwt', { session: false }), orderRouter);
-
+app.use('/media',passport.authenticate('jwt', { session: false }), mediaRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
